@@ -1,2 +1,6 @@
-BACKGROUND_IMAGES_PATH = '/Users/yairhadad/Desktop/Projects/Little fighter/Images/background'
-SPRINT_IMAGE_PATH =  '/Users/yairhadad/Desktop/Projects/Little fighter/Images/sprite'
+
+import sys
+
+IMAGES_PATH = sys.path[1]+"/Images"
+BACKGROUND_IMAGES_PATH = IMAGES_PATH+'/background'
+SPRINT_IMAGE_PATH =  IMAGES_PATH+'/sprite'

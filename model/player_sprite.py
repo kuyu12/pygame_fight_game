@@ -3,7 +3,7 @@ import random
 
 import pygame
 
-from model.AttackSprite import AttackSprite
+from model.attack_sprite import AttackSprite
 from model.movement_sprite import State, Direction, Direction
 from utils.path_utils import SPRINT_IMAGE_PATH
 

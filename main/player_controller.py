@@ -1,6 +1,6 @@
 import pygame
 
-from model.AttackSprite import AttackState
+from model.attack_sprite import AttackState
 from model.movement_sprite import Direction, State
 
 

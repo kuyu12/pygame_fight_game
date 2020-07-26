@@ -15,7 +15,7 @@ class AttackSprite(MovementSprite):
         super().__init__(start_position, bounds_size)
         self.is_state_block = False
         self.block_count = 0
-        self.block_max = 4
+        self.block_max = 6
         self.attack_state = AttackState.HAND
 
     def attack(self, attack):
@@ -57,6 +57,8 @@ class AttackSprite(MovementSprite):
     def frame_was_update(self):
         if not self.is_state_block:
             return
+        if self.block_count == 0:
+            self.block_max = len(self.images)
 
         self.block_count += 1
         if self.block_count >= self.block_max:
