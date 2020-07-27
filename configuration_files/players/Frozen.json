@@ -1,0 +1,26 @@
+{
+   "user_info": {
+        "player_name":"Frozen",
+        "profile_image": "/frozen_profile.png",
+        "start_health": 100,
+        "start_mana": 150
+   },
+   "sprite" : {
+        "walk":"/player/walk",
+        "stand":"/player/stand",
+        "hand_attack":"/player/attack_1",
+        "foot_attack":"/player/attack_2",
+        "running_hand_attack":"/player/attack_running_1",
+        "running_foot_attack":"/player/attack_running_2",
+        "defense":"/player/defense",
+        "defense_running":"/player/defense_running",
+        "running":"/player/running"
+   },
+   "attack": {
+        "hand_attack":10,
+        "foot_attack":10,
+        "running_hand_attack":15,
+        "running_foot_attack":15
+   }
+
+}

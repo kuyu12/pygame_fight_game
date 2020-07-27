@@ -1,7 +1,7 @@
 import pygame
 
-from model.attack_sprite import AttackState
-from model.movement_sprite import Direction, State
+from views.sprite_views.attack_sprite import AttackState
+from views.sprite_views.movement_sprite import Direction, State
 
 
 class PlayerController:

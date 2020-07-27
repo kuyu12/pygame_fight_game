@@ -1,6 +1,6 @@
 from enum import Enum
 
-from model.movement_sprite import MovementSprite, State, Direction
+from views.sprite_views.movement_sprite import MovementSprite, State, Direction
 
 
 class AttackState(Enum):

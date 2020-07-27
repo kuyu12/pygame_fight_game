@@ -1,5 +1,5 @@
 from utils.path_utils import BACKGROUND_IMAGES_PATH
-from model.animated_sprite import AnimatedSprite
+from views.sprite_views.animated_sprite import AnimatedSprite
 
 
 class BackgroundSprite(AnimatedSprite):

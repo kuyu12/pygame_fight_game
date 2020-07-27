@@ -1,47 +1,48 @@
 from functools import reduce
-import random
-
 import pygame
 
-from model.attack_sprite import AttackSprite
-from model.movement_sprite import State, Direction, Direction
+from utils.player_json_mapper import SpriteMapper
+from views.sprite_views.attack_sprite import AttackSprite
+from views.sprite_views.movement_sprite import State, Direction
 from utils.path_utils import SPRINT_IMAGE_PATH
 
 
 class PlayerSprite(AttackSprite):
 
-    def __init__(self, start_position, bounds_size):
+    def __init__(self, start_position, bounds_size,player_data):
+        self.player_data = player_data
         super().__init__(start_position, bounds_size)
 
     def load_images(self):
+
         # walk
-        self.walk_images_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/walk')
+        self.walk_images_R = self.get_images_with_path(self.player_data.sprite_walk_path)
         self.walk_images_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.walk_images_R))
 
         # stand
-        self.stand_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/stand')
+        self.stand_R = self.get_images_with_path(self.player_data.sprite_stand_path)
         self.stand_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.stand_R))
 
         # attack
-        self.attack_hand_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/attack_1')
+        self.attack_hand_R = self.get_images_with_path(self.player_data.sprite_hand_attack_path)
         self.attack_hand_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_hand_R))
-        self.attack_foot_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/attack_2')
+        self.attack_foot_R = self.get_images_with_path(self.player_data.sprite_foot_attack_path)
         self.attack_foot_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_foot_R))
 
-        self.attack_running_hand_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/attack_running_1')
+        self.attack_running_hand_R = self.get_images_with_path(self.player_data.sprite_running_hand_attack_path)
         self.attack_running_hand_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_running_hand_R))
-        self.attack_running_foot_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/attack_running_2')
+        self.attack_running_foot_R = self.get_images_with_path(self.player_data.sprite_running_foot_attack_path)
         self.attack_running_foot_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_running_foot_R))
 
         # defense
-        self.defense_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/defense')
+        self.defense_R = self.get_images_with_path(self.player_data.sprite_defense_path)
         self.defense_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.defense_R))
 
-        self.defense_running_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/defense_running')
+        self.defense_running_R = self.get_images_with_path(self.player_data.sprite_defense_running_path)
         self.defense_running_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.defense_running_R))
 
         # running
-        self.running_R = self.get_images_with_path(SPRINT_IMAGE_PATH + '/player/running')
+        self.running_R = self.get_images_with_path(self.player_data.sprite_running_path)
         self.running_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.running_R))
 
         self.images = self.stand_R

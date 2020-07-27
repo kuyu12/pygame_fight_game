@@ -1,7 +1,7 @@
 from enum import Enum
 from functools import reduce
 
-from model.animated_sprite import AnimatedSprite, Update_Type
+from views.sprite_views.animated_sprite import AnimatedSprite, Update_Type
 
 
 class State(Enum):
@@ -62,7 +62,8 @@ class MovementSprite(AnimatedSprite):
             self.rect.y = self.rect.y + def_y
 
     def on_state_change(self, state, direction):
-        self.index = 0
+        if state != self.state:
+            self.index = 0
         self.update_face_direction(self.directions)
         self.change_movement_by_state(state, direction)
         # change sprite images
