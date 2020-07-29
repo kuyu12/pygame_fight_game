@@ -1,0 +1,1 @@
+USER_INFO_SIZE = (270, 100)
