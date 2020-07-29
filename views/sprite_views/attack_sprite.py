@@ -19,7 +19,19 @@ class AttackSprite(MovementSprite):
 
     def attack(self, attack):
         self.attack_state = attack
-        self.set_state(State.ATTACK,self.faceDirection)
+        self.set_state(State.ATTACK, self.faceDirection)
+
+    def is_on_attack_mode(self):
+        if (self.state == State.ATTACK or self.state == State.RUNNING_ATTACK) \
+                and self.attack_state != AttackState.DEFENSE:
+            return True
+        return False
+
+    def is_on_defence_mode(self):
+        if (self.state == State.ATTACK or self.state == State.RUNNING_ATTACK) \
+                and self.attack_state == AttackState.DEFENSE:
+            return True
+        return False
 
     def on_state_change(self, state, direction):
         if self.state == State.ATTACK:

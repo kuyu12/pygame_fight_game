@@ -1,10 +1,7 @@
 from functools import reduce
 import pygame
-
-from utils.player_json_mapper import SpriteMapper
 from views.sprite_views.attack_sprite import AttackSprite
 from views.sprite_views.movement_sprite import State, Direction
-from utils.path_utils import SPRINT_IMAGE_PATH
 
 
 class PlayerSprite(AttackSprite):

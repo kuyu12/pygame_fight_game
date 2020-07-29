@@ -1,5 +1,5 @@
+from utils.json_mappers.player_json_mapper import SpriteMapper, InfoMapper
 from utils.path_utils import SPRINT_IMAGE_PATH
-from utils.player_json_mapper import SpriteMapper, InfoMapper
 
 
 class PlayerData:

@@ -1,0 +1,9 @@
+{
+  "stage_image": "background3",
+  "stage_name":"The throne",
+  "road_map": [
+    {"1": "Grey"},
+    {"1": "Grey"}
+  ],
+  "user_start_position": [200, 600]
+}
