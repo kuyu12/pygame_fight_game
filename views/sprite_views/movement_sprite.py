@@ -25,6 +25,9 @@ class MovementSprite(AnimatedSprite):
         self.load_images()
         self.move_x = 0
         self.move_y = 0
+        self.position_x = start_position[0]
+        self.position_y = start_position[1]
+
         self.bounds_size = bounds_size
         self.faceDirection = Direction.RIGHT
         self.state = State.STANDING
@@ -56,10 +59,12 @@ class MovementSprite(AnimatedSprite):
     def move_one_time(self, def_x, def_y):
         wight = self.bounds_size[0]
         height = self.bounds_size[1]
-        if wight - self.size[0] >= self.rect.x + def_x >= 0 and \
-                height * 0.8 - self.size[1] <= self.rect.y + def_y <= height - self.size[1]:
-            self.rect.x = self.rect.x + def_x
-            self.rect.y = self.rect.y + def_y
+        if wight - self.size[0] >= self.rect.x + def_x >= 0:
+            self.position_x += def_x
+            self.rect.x = self.position_x
+        if height * 0.8 - self.size[1] <= self.rect.y + def_y <= height - self.size[1]:
+            self.position_y += def_y
+            self.rect.y = self.position_y
 
     def on_state_change(self, state, direction):
         if state != self.state:

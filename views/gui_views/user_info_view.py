@@ -19,13 +19,13 @@ class UserInfoView(Surface):
         font = pygame.font.SysFont(pygame.font.get_default_font(), 36)
         small_font = pygame.font.SysFont(pygame.font.get_default_font(), 20)
 
-        textNameSurface = font.render(self.player_data.player_name, True, (0, 0, 0))
+        textNameSurface = font.render(self.player_data.player_name, True, BLACK)
         self.blit(textNameSurface, [100, 10])
 
-        textHealthSurface = small_font.render("Health:", True, (0, 0, 0))
+        textHealthSurface = small_font.render("Health:", True, BLACK)
         self.blit(textHealthSurface, [100, 36])
 
-        textManaSurface = small_font.render("Mana:", True, (0, 0, 0))
+        textManaSurface = small_font.render("Mana:", True, BLACK)
         self.blit(textManaSurface, [100, 61])
 
         pygame.draw.rect(self, RED, pygame.Rect(100, 50, 150, 10))

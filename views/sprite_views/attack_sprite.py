@@ -1,5 +1,4 @@
 from enum import Enum
-
 from views.sprite_views.movement_sprite import MovementSprite, State, Direction
 
 
@@ -29,8 +28,6 @@ class AttackSprite(MovementSprite):
             self.is_state_block = True
 
         super().on_state_change(state, direction)
-
-
 
     def get_attack_images(self):
         if self.last_state == State.RUNNING:

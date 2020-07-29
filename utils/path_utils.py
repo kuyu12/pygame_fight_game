@@ -1,5 +1,6 @@
 import sys
 
+
 IMAGES_PATH = sys.path[1] + "/Images"
 BACKGROUND_IMAGES_PATH = IMAGES_PATH + '/background'
 USER_INFO_BACKGROUND_PATH = BACKGROUND_IMAGES_PATH+"/blue_background.jpg"

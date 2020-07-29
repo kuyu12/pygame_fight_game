@@ -9,8 +9,9 @@ from utils.path_utils import SPRINT_IMAGE_PATH
 
 class PlayerSprite(AttackSprite):
 
-    def __init__(self, start_position, bounds_size,player_data):
+    def __init__(self, start_position, bounds_size,player_data,move_speed):
         self.player_data = player_data
+        self.move_speed = move_speed
         super().__init__(start_position, bounds_size)
 
     def load_images(self):
@@ -71,33 +72,33 @@ class PlayerSprite(AttackSprite):
     def change_movement_by_state(self, state, direction):
         if state == State.WALKING:
             if self.directions[Direction.RIGHT]:
-                self.move_x = 1
+                self.move_x = self.move_speed
             elif self.directions[Direction.LEFT]:
-                self.move_x = -1
+                self.move_x = -self.move_speed
             else:
                 self.move_x = 0
             if self.directions[Direction.UP]:
-                self.move_y = -1
+                self.move_y = -self.move_speed
             elif self.directions[Direction.DOWN]:
-                self.move_y = 1
+                self.move_y = self.move_speed
             else:
                 self.move_y = 0
 
         if state == State.RUNNING:
             if self.directions[Direction.RIGHT]:
-                self.move_x = 3
+                self.move_x = self.move_speed * 3
             if self.directions[Direction.LEFT]:
-                self.move_x = -3
+                self.move_x = -self.move_speed * 3
             if self.directions[Direction.UP]:
-                self.move_y = -1
+                self.move_y = -self.move_speed
             if self.directions[Direction.DOWN]:
-                self.move_y = 1
+                self.move_y = self.move_speed
 
         if self.state == State.RUNNING_ATTACK:
             if self.directions[Direction.RIGHT]:
-                self.move_x = 2
+                self.move_x = self.move_speed * 2
             if self.directions[Direction.LEFT]:
-                self.move_x = -2
+                self.move_x = -self.move_speed * 2
 
         if self.state == State.STANDING:
             self.directions[direction] = False

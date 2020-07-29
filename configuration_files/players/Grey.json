@@ -1,0 +1,25 @@
+{
+   "user_info": {
+        "player_name":"Grey",
+        "profile_image": "/grey_profile.png",
+        "start_health": 100,
+        "start_mana": 100
+   },
+   "sprite" : {
+        "walk":"/grey/walk",
+        "stand":"/grey/stand",
+        "hand_attack":"/grey/attack_1",
+        "foot_attack":"/grey/attack_2",
+        "running_hand_attack":"/grey/attack_running_1",
+        "running_foot_attack":"/grey/attack_running_2",
+        "defense":"/grey/defense",
+        "defense_running":"/grey/defense_running",
+        "running":"/grey/running"
+   },
+   "attack": {
+        "hand_attack":5,
+        "foot_attack":5,
+        "running_hand_attack":10,
+        "running_foot_attack":10
+   }
+}

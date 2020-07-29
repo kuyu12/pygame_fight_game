@@ -1,8 +1,6 @@
 import json
-
 from model.player_data import PlayerData
 from utils.path_utils import CONFIGURATION_FILES_PATH
-from views.sprite_views.player_sprite import PlayerSprite
 
 
 class PlayerSpriteFactory:

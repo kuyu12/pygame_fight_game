@@ -16,11 +16,11 @@ class PlayerData:
         self.sprite_foot_attack_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FOOT_ATTACK]
         self.sprite_running_hand_attack_path = SPRINT_IMAGE_PATH + self.sprite_data[
             SpriteMapper.SPRITE_RUNNING_HAND_ATTACK]
-        self.sprite_running_foot_attack_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FOOT_ATTACK]
+        self.sprite_running_foot_attack_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_RUNNING_FOOT_ATTACK]
         self.sprite_defense_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_DEFENSE]
         self.sprite_defense_running_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_DEFENSE_RUNNING]
         self.sprite_running_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_RUNNING]
 
-        # player info
+        # frozen info
         self.player_name = self.player_info_data[InfoMapper.PLAYER_NAME]
         self.profile_image = self.player_info_data[InfoMapper.PROFILE_IMAGE]

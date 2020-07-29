@@ -61,7 +61,8 @@ class AnimatedSprite(pygame.sprite.Sprite):
     def get_images_with_path(path):
         images = []
 
-        dirlist = sorted(os.listdir(path),key = lambda x: re.findall(r'[0-9]+', x)[-1])
+        dirlist = sorted(os.listdir(path),key = lambda x: int(re.findall(r'[0-9]+', x)[-1]))
+
         for image in dirlist:
 
             images.append(pygame.image.load(os.path.join(path, image)))
