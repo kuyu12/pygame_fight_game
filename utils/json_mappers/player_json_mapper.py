@@ -15,3 +15,13 @@ class InfoMapper:
     USER_INFO = "user_info"
     PLAYER_NAME = "player_name"
     PROFILE_IMAGE = "profile_image"
+    START_HEALTH = "start_health"
+    START_MANA = "start_mana"
+
+
+class AttackMapper:
+    ATTACK_INFO = "attack"
+    ATTACK_HAND = "hand_attack"
+    ATTACK_FOOT = "foot_attack"
+    ATTACK_RUNNING_HAND = "running_hand_attack"
+    ATTACK_RUNNING_FOOT = "running_foot_attack"

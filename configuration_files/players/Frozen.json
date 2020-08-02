@@ -3,7 +3,7 @@
         "player_name":"Frozen",
         "profile_image": "/frozen_profile.png",
         "start_health": 100,
-        "start_mana": 150
+        "start_mana": 100
    },
    "sprite" : {
         "walk":"/frozen/walk",

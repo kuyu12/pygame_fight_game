@@ -1,14 +1,16 @@
+import uuid
 from functools import reduce
 import pygame
-from views.sprite_views.attack_sprite import AttackSprite
+from views.sprite_views.attack_sprite import AttackSprite, AttackState
 from views.sprite_views.movement_sprite import State, Direction
 
 
 class PlayerSprite(AttackSprite):
 
-    def __init__(self, start_position, bounds_size,player_data,move_speed):
+    def __init__(self, start_position, bounds_size,player_data,move_speed,player_id = uuid.uuid4()):
         self.player_data = player_data
         self.move_speed = move_speed
+        self.player_id = str(player_id)
         super().__init__(start_position, bounds_size)
 
     def load_images(self):
@@ -53,6 +55,7 @@ class PlayerSprite(AttackSprite):
             state = self.state
 
         self.set_state(state, direction)
+
 
     def on_state_change(self, state, direction):
         super().on_state_change(state, direction)

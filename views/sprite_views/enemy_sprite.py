@@ -1,6 +1,6 @@
+import uuid
 from math import sqrt
 import random
-
 from views.sprite_views.animated_sprite import Update_Type
 from views.sprite_views.attack_sprite import AttackState
 from views.sprite_views.movement_sprite import State, Direction
@@ -9,14 +9,13 @@ from views.sprite_views.player_sprite import PlayerSprite
 
 class EnemySprite(PlayerSprite):
 
-    def __init__(self, start_position, bounds_size, player_data, user_player):
-        super().__init__(start_position, bounds_size, player_data, 0.7)
+    def __init__(self, start_position, bounds_size, player_data, user_player,player_id = uuid.uuid4()):
+        super().__init__(start_position, bounds_size, player_data, 0.7,player_id)
         self.user_player = user_player
         self.firstMove = False
         self.Y_DEDUCTION_THRESHOLD = 0.1
         self.direction_x = 0
         self.direction_y = 0
-
         self.is_attack_y_ready = False
         self.is_attack_x_ready = False
 
