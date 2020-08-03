@@ -10,6 +10,7 @@ from utils.logger import logger
 # attack reaction
 
 if __name__ == '__main__':
+    logger.info("Game Start")
     pygame.init()
     running = True
 

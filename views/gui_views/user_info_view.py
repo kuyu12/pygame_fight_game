@@ -6,16 +6,17 @@ from views.gui_views.surface_inteface import SurfaceInterface
 
 
 class UserInfoView(SurfaceInterface):
-    def __init__(self,size,player_data):
+    def __init__(self, size, player_data):
         super().__init__(size)
         self.player_data = player_data
         self.health = player_data.basic_health
         self.mana = player_data.basic_mana
 
-        background = pygame.transform.scale(pygame.image.load(USER_INFO_BACKGROUND_PATH),(size))
+        background = pygame.transform.scale(pygame.image.load(USER_INFO_BACKGROUND_PATH), size)
         self.blit(background, (0, 0))
 
-        profile_img = pygame.transform.scale(pygame.image.load(PROFILE_IMAGES_PATH+self.player_data.profile_image),(80, 80))
+        profile_img = pygame.transform.scale(pygame.image.load(PROFILE_IMAGES_PATH + self.player_data.profile_image),
+                                             (80, 80))
         self.blit(profile_img, (10, 10))
 
         font = pygame.font.SysFont(pygame.font.get_default_font(), 36)
@@ -30,19 +31,16 @@ class UserInfoView(SurfaceInterface):
         textManaSurface = small_font.render("Mana:", True, BLACK)
         self.blit(textManaSurface, [100, 61])
 
-
-    def update(self,game_state):
+    def update(self, game_state):
         self.health = game_state.user_state.user_health
         self.mana = game_state.user_state.user_mana
-
 
     def draw(self, surface):
         surface.blit(self, (0, 0))
 
         health_draw = self.health / 100 * 150
-        print(health_draw)
         pygame.draw.rect(self, BLACK, pygame.Rect(100, 50, 150, 10), 0)
-        pygame.draw.rect(self, RED, pygame.Rect(100, 50, health_draw, 10),0)
+        pygame.draw.rect(self, RED, pygame.Rect(100, 50, health_draw, 10), 0)
         pygame.draw.rect(self, BLACK, pygame.Rect(100, 50, 150, 10), 1)
 
         mana_draw = self.mana / 100 * 150

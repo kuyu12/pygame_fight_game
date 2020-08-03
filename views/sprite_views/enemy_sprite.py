@@ -1,11 +1,14 @@
 import uuid
 from math import sqrt
 import random
+
+from utils.color import RED, BLACK
 from views.sprite_views.animated_sprite import Update_Type
 from views.sprite_views.attack_sprite import AttackState
 from views.sprite_views.movement_sprite import State, Direction
 from views.sprite_views.player_sprite import PlayerSprite
-
+import numpy as np
+import pygame
 
 class EnemySprite(PlayerSprite):
 
@@ -18,6 +21,21 @@ class EnemySprite(PlayerSprite):
         self.direction_y = 0
         self.is_attack_y_ready = False
         self.is_attack_x_ready = False
+
+    def draw_hp_bar(self, surface, current_hp,base_hp):
+        # if current_hp == base_hp:
+        #     return
+
+        width, height = 50, 5
+        offset = np.array([12, -height+5])
+
+        coords = (self.rect.x,self.rect.y) + offset
+        size = (width, height)
+        pygame.draw.rect(surface, BLACK, (coords, size))  # background frame for the bar
+
+        hp_bar_color = RED
+        hp_bar_width = width * current_hp / base_hp
+        pygame.draw.rect(surface, hp_bar_color, (coords, (hp_bar_width, height)))
 
     def update(self, update_type=Update_Type.TIME):
 

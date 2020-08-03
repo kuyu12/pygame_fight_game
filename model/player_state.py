@@ -6,6 +6,7 @@ from views.sprite_views.movement_sprite import State
 class PlayerState:
     def __init__(self, player_data, player_id):
         self.user_health = player_data.basic_health
+        self.user_base_health = player_data.basic_health
         self.user_mana = player_data.basic_mana
         self.user_id = str(player_id)
         self.attack_dict = player_data.attack_dict
@@ -21,3 +22,9 @@ class PlayerState:
                 return self.attack_dict[AttackMapper.ATTACK_HAND]
             if attack_state == AttackState.FOOT:
                 return self.attack_dict[AttackMapper.ATTACK_FOOT]
+
+    def set_damage(self,damage):
+        self.user_health -= damage
+
+        if self.user_health <= 0:
+            self.user_health = 0

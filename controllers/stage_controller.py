@@ -46,16 +46,13 @@ class StageController:
         self.sprite_controller.add(self.enemy)
         # END TEMP
 
-
-
-
     def update(self):
         self.sprite_controller.update()
         self.collision_controller.update()
         self.user_info_view.update(self.game_state)
 
     def draw(self, surface):
-        self.sprite_controller.draw(surface)
+        self.sprite_controller.draw(surface,self.game_state)
         self.stage_headline.draw(surface)
         self.user_info_view.draw(surface)
 

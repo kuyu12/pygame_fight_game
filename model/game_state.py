@@ -27,5 +27,8 @@ class GameState:
         if self.user_state.user_id == message['beaten']:
             beat_enemy = self.enemies.get(message['beat'],None)
             damage = beat_enemy.get_attack_damage(message['attack'],message['state'])
-            self.user_state.user_health -= damage
-            print(self.user_state.user_health)
+            self.user_state.set_damage(damage)
+
+        elif self.enemies.get(message['beaten']):
+            damage = self.user_state.get_attack_damage(message['attack'],message['state'])
+            self.enemies.get(message['beaten']).set_damage(damage)
