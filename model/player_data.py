@@ -21,6 +21,7 @@ class PlayerData:
         self.sprite_defense_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_DEFENSE]
         self.sprite_defense_running_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_DEFENSE_RUNNING]
         self.sprite_running_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_RUNNING]
+        self.sprite_fall_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FALL]
 
         # info
         self.player_name = self.player_info_data[InfoMapper.PLAYER_NAME]

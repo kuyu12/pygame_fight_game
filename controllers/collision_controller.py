@@ -1,9 +1,11 @@
 from pydispatch import dispatcher
 
+from model.collision_event import CollisionEvent
 from utils.const import COLLISION_DELAY_TIME_SEC
 from utils.json_mappers.stage_json_mapper import SignalMapper
 from views.sprite_views.enemy_sprite import EnemySprite
 from views.sprite_views.user_sprite import UserSprite
+from datetime import datetime
 
 
 class CollisionController:
@@ -24,14 +26,15 @@ class CollisionController:
 
     def send_attack_event(self, beat, beaten, attack, state):
         if beat in self.collision_delay:
-            self.collision_delay[beat] += 1
-            if self.collision_delay[beat] > COLLISION_DELAY_TIME_SEC:
+            if datetime.now() - self.collision_delay[beat] > COLLISION_DELAY_TIME_SEC:
                 self.collision_delay.pop(beat)
             else:
                 return
 
-        self.collision_delay[beat] = 0
+        self.collision_delay[beat] = datetime.now()
         dispatcher.send(signal=SignalMapper.COLLISION_UPDATE,
-                        message={"beaten": beaten, "beat": beat,
-                                 "attack": attack,
-                                 "state": state})
+                        event=CollisionEvent(
+                            {"beaten": beaten,
+                             "beat": beat,
+                             "attack": attack,
+                             "state": state}))

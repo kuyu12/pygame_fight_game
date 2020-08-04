@@ -2,8 +2,8 @@
    "user_info": {
         "player_name":"Grey",
         "profile_image": "/grey_profile.png",
-        "start_health": 100,
-        "start_mana": 100
+        "start_health": 20,
+        "start_mana": 0
    },
    "sprite" : {
         "walk":"/grey/walk",
@@ -14,7 +14,8 @@
         "running_foot_attack":"/grey/attack_running_2",
         "defense":"/grey/defense",
         "defense_running":"/grey/defense_running",
-        "running":"/grey/running"
+        "running":"/grey/running",
+        "fall":"/grey/fall"
    },
    "attack": {
         "hand_attack":5,

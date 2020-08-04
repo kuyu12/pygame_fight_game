@@ -14,7 +14,8 @@
         "running_foot_attack":"/firen/attack_running_2",
         "defense":"/firen/defense",
         "defense_running":"/firen/defense_running",
-        "running":"/firen/running"
+        "running":"/firen/running",
+        "fall":"/firen/fall"
    },
    "attack": {
         "hand_attack":10,

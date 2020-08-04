@@ -45,6 +45,9 @@ class PlayerSprite(AttackSprite):
         self.running_R = self.get_images_with_path(self.player_data.sprite_running_path)
         self.running_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.running_R))
 
+        self.fall_R = self.get_images_with_path(self.player_data.sprite_fall_path)
+        self.fall_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.fall_R))
+
         self.images = self.stand_R
 
     def control_move(self, state=None, direction=None):
@@ -68,6 +71,10 @@ class PlayerSprite(AttackSprite):
 
         elif self.state == State.STANDING:
             self.images = self.stand_R if self.faceDirection == Direction.RIGHT else self.stand_L
+
+        elif self.state == State.BEATEN:
+            self.images = self.fall_R if self.faceDirection == Direction.RIGHT else self.fall_L
+            self.is_blocking_move = True
 
     def change_movement_by_state(self, state, direction):
         if state == State.WALKING:
@@ -106,6 +113,12 @@ class PlayerSprite(AttackSprite):
         if self.state == State.ATTACK:
             for dir in self.directions:
                 self.directions[dir] = False
+
+        if self.state == State.BEATEN:
+            if self.directions[Direction.RIGHT]:
+                self.move_x = -self.move_speed *3
+            elif self.directions[Direction.LEFT]:
+                self.move_x = +self.move_speed *3
 
         if reduce(lambda a,b: a+b,self.directions.values()) == 0:
             self.move_x = 0

@@ -5,10 +5,6 @@ from controllers.stage_controller import StageController
 from utils.utils_factory import UtilsFactory
 from utils.logger import logger
 
-# TODO:
-# player data controller
-# attack reaction
-
 if __name__ == '__main__':
     logger.info("Game Start")
     pygame.init()

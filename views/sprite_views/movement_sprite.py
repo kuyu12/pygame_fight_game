@@ -10,6 +10,7 @@ class State(Enum):
     RUNNING = 3
     ATTACK = 4
     RUNNING_ATTACK = 5
+    BEATEN = 6
 
 
 class Direction(Enum):
@@ -17,6 +18,16 @@ class Direction(Enum):
     LEFT = "left"
     UP = "up"
     DOWN = "down"
+
+    def negative(self):
+        if self == Direction.RIGHT:
+            return Direction.LEFT
+        if self == Direction.LEFT:
+            return Direction.RIGHT
+        if self == Direction.UP:
+            return Direction.DOWN
+        if self == Direction.DOWN:
+            return Direction.UP
 
 
 class MovementSprite(AnimatedSprite):
@@ -27,6 +38,10 @@ class MovementSprite(AnimatedSprite):
         self.move_y = 0
         self.position_x = start_position[0]
         self.position_y = start_position[1]
+
+        self.is_blocking_move = False
+        self.block_count = 0
+        self.block_max = 6
 
         self.bounds_size = bounds_size
         self.faceDirection = Direction.RIGHT
@@ -42,7 +57,13 @@ class MovementSprite(AnimatedSprite):
         super().__init__(start_position, self.images)
 
     def set_state(self, state, direction):
+        # current state is blocking move
+        if self.is_blocking_move:
+            self.last_state = state
+            return
+
         self.directions[direction] = state != State.STANDING
+
         if state != State.STANDING and self.state != State.RUNNING or state == State.ATTACK:
             self.last_state = self.state
             self.state = state
@@ -86,3 +107,16 @@ class MovementSprite(AnimatedSprite):
         # load sprite images
         # create self.images with default images
         pass
+
+    def frame_was_update(self):
+        if not self.is_blocking_move:
+            return
+
+        if self.block_count == 0:
+            self.block_max = len(self.images) - 3
+
+        self.block_count += 1
+        if self.block_count >= self.block_max:
+            self.block_count = 0
+            self.is_blocking_move = False
+            self.set_state(State.STANDING, self.faceDirection)

@@ -23,8 +23,8 @@ class EnemySprite(PlayerSprite):
         self.is_attack_x_ready = False
 
     def draw_hp_bar(self, surface, current_hp,base_hp):
-        # if current_hp == base_hp:
-        #     return
+        if current_hp == base_hp:
+            return
 
         width, height = 50, 5
         offset = np.array([12, -height+5])

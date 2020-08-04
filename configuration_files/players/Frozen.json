@@ -14,7 +14,8 @@
         "running_foot_attack":"/frozen/attack_running_2",
         "defense":"/frozen/defense",
         "defense_running":"/frozen/defense_running",
-        "running":"/frozen/running"
+        "running":"/frozen/running",
+        "fall":"/frozen/fall"
    },
    "attack": {
         "hand_attack":10,

@@ -12,9 +12,9 @@ class AttackState(Enum):
 class AttackSprite(MovementSprite):
     def __init__(self, start_position, bounds_size):
         super().__init__(start_position, bounds_size)
-        self.is_state_block = False
-        self.block_count = 0
-        self.block_max = 6
+        self.is_attack_active = False
+        self.attack_block_count = 0
+        self.attack_block_max = 6
         self.attack_state = AttackState.HAND
 
     def attack(self, attack):
@@ -36,8 +36,8 @@ class AttackSprite(MovementSprite):
     def on_state_change(self, state, direction):
         if self.state == State.ATTACK:
             self.images = self.get_attack_images()
-            self.block_count = 0
-            self.is_state_block = True
+            self.attack_block_count = 0
+            self.is_attack_active = True
 
         super().on_state_change(state, direction)
 
@@ -64,14 +64,15 @@ class AttackSprite(MovementSprite):
             return self.defense_R if self.faceDirection == Direction.RIGHT else self.defense_L
 
     def frame_was_update(self):
-        if not self.is_state_block:
+        super().frame_was_update()
+        if not self.is_attack_active:
             return
-        if self.block_count == 0:
-            self.block_max = len(self.images)
+        if self.attack_block_count == 0:
+            self.attack_block_max = len(self.images)
 
-        self.block_count += 1
-        if self.block_count >= self.block_max:
-            self.block_count = 0
-            self.is_state_block = False
+        self.attack_block_count += 1
+        if self.attack_block_count >= self.attack_block_max:
+            self.attack_block_count = 0
+            self.is_attack_active = False
             if self.state == State.ATTACK or self.state == State.RUNNING_ATTACK:
                 self.set_state(State.STANDING, self.faceDirection)

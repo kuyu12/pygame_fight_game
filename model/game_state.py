@@ -12,23 +12,18 @@ class GameState:
         self.enemies = {}
         self.user_state = PlayerState(player_data, player_id)
 
-        # events
-        dispatcher.connect(self.handle_collision_event, signal=SignalMapper.COLLISION_UPDATE, sender=dispatcher.Any)
 
     def add_enemy(self, enemy_data, enemy_id=uuid.uuid4()):
         logger.info("enemy is added with id: "+str(enemy_id))
         enemy_state = PlayerState(enemy_data, enemy_id)
         self.enemies[str(enemy_id)] = enemy_state
 
-    # subscribe:
-
-    def handle_collision_event(self,message):
-        logger.info("collision happened with " + str(message))
-        if self.user_state.user_id == message['beaten']:
-            beat_enemy = self.enemies.get(message['beat'],None)
-            damage = beat_enemy.get_attack_damage(message['attack'],message['state'])
+    def handle_collision_event(self,event):
+        if self.user_state.user_id == event.beaten:
+            beat_enemy = self.enemies.get(event.beat,None)
+            damage = beat_enemy.get_attack_damage(event.attack,event.state)
             self.user_state.set_damage(damage)
 
-        elif self.enemies.get(message['beaten']):
-            damage = self.user_state.get_attack_damage(message['attack'],message['state'])
-            self.enemies.get(message['beaten']).set_damage(damage)
+        elif self.enemies.get(event.beaten):
+            damage = self.user_state.get_attack_damage(event.attack,event.state)
+            self.enemies.get(event.beaten).set_damage(damage)
