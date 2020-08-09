@@ -15,7 +15,8 @@
         "defense":"/frozen/defense",
         "defense_running":"/frozen/defense_running",
         "running":"/frozen/running",
-        "fall":"/frozen/fall"
+        "fall":"/frozen/fall",
+        "dead":"/frozen/dead"
    },
    "attack": {
         "hand_attack":10,

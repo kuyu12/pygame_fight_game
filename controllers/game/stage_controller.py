@@ -1,8 +1,9 @@
 import uuid
 
-from controllers.collision_controller import CollisionController
-from controllers.player_controller import PlayerController
-from controllers.sprite_controller import SpriteController
+from controllers.game.collision_controller import CollisionController
+from controllers.game.player_controller import PlayerController
+from controllers.surface_controller import SurfaceController
+from controllers.game.sprite_controller import SpriteController
 from model.game_state import GameState
 from utils.const import USER_INFO_SIZE
 from utils.json_mappers.stage_json_mapper import SignalMapper
@@ -15,7 +16,8 @@ from utils.logger import logger
 from pydispatch import dispatcher
 import random
 
-class StageController:
+
+class StageController(SurfaceController):
 
     def __init__(self, stage_data, player_data):
         logger.info("StageController is Created")
@@ -40,19 +42,19 @@ class StageController:
         dispatcher.connect(self.handle_collision_event, signal=SignalMapper.COLLISION_UPDATE, sender=dispatcher.Any)
 
         # TEMP
-        # for temp in range(4):
-        enemy_data = UtilsFactory.get_player_data('Grey')
-        enemy_id = uuid.uuid4()
-        self.game_state.add_enemy(enemy_data, enemy_id)
-        self.enemy = EnemySprite((random.randint(100,900), 600), stage_data.background.size, enemy_data, self.user_sprite, enemy_id)
-        self.sprite_controller.add(self.enemy)
+        for temp in range(4):
+            enemy_data = UtilsFactory.get_player_data('Grey')
+            enemy_id = uuid.uuid4()
+            self.game_state.add_enemy(enemy_data, enemy_id)
+            self.enemy = EnemySprite((random.randint(100, 900), 600), stage_data.background.size, enemy_data,
+                                     self.user_sprite, enemy_id)
+            self.sprite_controller.add(self.enemy)
         # END TEMP
 
     def update(self):
         self.sprite_controller.update()
         self.collision_controller.update()
         self.user_info_view.update(self.game_state)
-
         self.update_state()
 
     def draw(self, surface):
@@ -67,7 +69,8 @@ class StageController:
         dead_enemies = list(
             filter(lambda x: self.game_state.enemies[x].user_health <= 0, self.game_state.enemies)).copy()
         for dead_enemy in dead_enemies:
-            self.sprite_controller.remove_by_id(dead_enemy)
+            logger.info("enemy: " + dead_enemy + " is dead")
+            self.sprite_controller.dead_by_id(dead_enemy)
             self.game_state.enemies.pop(dead_enemy)
 
     def handle_collision_event(self, event):

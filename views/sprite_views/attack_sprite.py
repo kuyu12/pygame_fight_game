@@ -18,6 +18,9 @@ class AttackSprite(MovementSprite):
         self.attack_state = AttackState.HAND
 
     def attack(self, attack):
+        if self.attack_state == AttackState.DEFENSE and attack == AttackState.HAND:
+            print(" I GET HERE!")
+
         self.attack_state = attack
         self.set_state(State.ATTACK, self.faceDirection)
 
@@ -31,6 +34,10 @@ class AttackSprite(MovementSprite):
         if (self.state == State.ATTACK or self.state == State.RUNNING_ATTACK) \
                 and self.attack_state == AttackState.DEFENSE:
             return True
+
+        if self.state == State.BEATEN:
+            return True
+
         return False
 
     def on_state_change(self, state, direction):
@@ -67,6 +74,7 @@ class AttackSprite(MovementSprite):
         super().frame_was_update()
         if not self.is_attack_active:
             return
+
         if self.attack_block_count == 0:
             self.attack_block_max = len(self.images)
 

@@ -3,14 +3,16 @@ from functools import reduce
 import pygame
 from views.sprite_views.attack_sprite import AttackSprite, AttackState
 from views.sprite_views.movement_sprite import State, Direction
+from utils.logger import logger
 
 
 class PlayerSprite(AttackSprite):
 
-    def __init__(self, start_position, bounds_size,player_data,move_speed,player_id = uuid.uuid4()):
+    def __init__(self, start_position, bounds_size, player_data, move_speed, player_id=uuid.uuid4()):
         self.player_data = player_data
         self.move_speed = move_speed
         self.player_id = str(player_id)
+        self.on_dead_animation_finish = lambda x: x  # empty func
         super().__init__(start_position, bounds_size)
 
     def load_images(self):
@@ -30,9 +32,11 @@ class PlayerSprite(AttackSprite):
         self.attack_foot_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_foot_R))
 
         self.attack_running_hand_R = self.get_images_with_path(self.player_data.sprite_running_hand_attack_path)
-        self.attack_running_hand_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_running_hand_R))
+        self.attack_running_hand_L = list(
+            map(lambda x: pygame.transform.flip(x, True, False), self.attack_running_hand_R))
         self.attack_running_foot_R = self.get_images_with_path(self.player_data.sprite_running_foot_attack_path)
-        self.attack_running_foot_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.attack_running_foot_R))
+        self.attack_running_foot_L = list(
+            map(lambda x: pygame.transform.flip(x, True, False), self.attack_running_foot_R))
 
         # defense
         self.defense_R = self.get_images_with_path(self.player_data.sprite_defense_path)
@@ -48,6 +52,9 @@ class PlayerSprite(AttackSprite):
         self.fall_R = self.get_images_with_path(self.player_data.sprite_fall_path)
         self.fall_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.fall_R))
 
+        self.dead_R = self.get_images_with_path(self.player_data.sprite_dead_path)
+        self.dead_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.dead_R))
+
         self.images = self.stand_R
 
     def control_move(self, state=None, direction=None):
@@ -59,9 +66,17 @@ class PlayerSprite(AttackSprite):
 
         self.set_state(state, direction)
 
+    def set_dead_state(self, on_dead_animation_finish):
+        self.is_blocking_move = False
+        self.control_move(State.FALL_TO_DEAD)
+        self.on_dead_animation_finish = on_dead_animation_finish
 
     def on_state_change(self, state, direction):
         super().on_state_change(state, direction)
+
+        if self.state == State.DEAD:
+            self.on_dead_animation_finish(self)
+            return
 
         if self.state == State.WALKING:
             self.images = self.walk_images_R if self.faceDirection == Direction.RIGHT else self.walk_images_L
@@ -75,6 +90,12 @@ class PlayerSprite(AttackSprite):
         elif self.state == State.BEATEN:
             self.images = self.fall_R if self.faceDirection == Direction.RIGHT else self.fall_L
             self.is_blocking_move = True
+            self.finish_block_state = State.STANDING
+
+        elif self.state == State.FALL_TO_DEAD:
+            self.images = self.dead_R if self.faceDirection == Direction.RIGHT else self.dead_L
+            self.is_blocking_move = True
+            self.finish_block_state = State.DEAD
 
     def change_movement_by_state(self, state, direction):
         if state == State.WALKING:
@@ -110,17 +131,16 @@ class PlayerSprite(AttackSprite):
         if self.state == State.STANDING:
             self.directions[direction] = False
 
-        if self.state == State.ATTACK:
+        if self.state == State.ATTACK or self.state == State.DEAD:
             for dir in self.directions:
                 self.directions[dir] = False
 
         if self.state == State.BEATEN:
             if self.directions[Direction.RIGHT]:
-                self.move_x = -self.move_speed *3
+                self.move_x = -self.move_speed * 3
             elif self.directions[Direction.LEFT]:
-                self.move_x = +self.move_speed *3
+                self.move_x = +self.move_speed * 3
 
-        if reduce(lambda a,b: a+b,self.directions.values()) == 0:
+        if reduce(lambda a, b: a + b, self.directions.values()) == 0:
             self.move_x = 0
             self.move_y = 0
-

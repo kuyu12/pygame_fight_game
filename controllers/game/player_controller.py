@@ -1,5 +1,4 @@
 import pygame
-
 from views.sprite_views.attack_sprite import AttackState
 from views.sprite_views.movement_sprite import Direction, State
 

@@ -15,7 +15,8 @@
         "defense":"/firen/defense",
         "defense_running":"/firen/defense_running",
         "running":"/firen/running",
-        "fall":"/firen/fall"
+        "fall":"/firen/fall",
+        "dead":"/frozen/dead"
    },
    "attack": {
         "hand_attack":10,

@@ -7,3 +7,4 @@ class StageMapper:
 
 class SignalMapper:
     COLLISION_UPDATE = "collision_update"
+    SCREEN_TYPE_CHANGE = "screen_type_change"

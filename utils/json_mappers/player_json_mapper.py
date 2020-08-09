@@ -10,6 +10,7 @@ class SpriteMapper:
     SPRITE_DEFENSE_RUNNING = "defense_running"
     SPRITE_RUNNING = "running"
     SPRITE_FALL = "fall"
+    SPRITE_DEAD = "dead"
 
 
 class InfoMapper:

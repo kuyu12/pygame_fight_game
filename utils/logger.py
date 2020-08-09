@@ -26,7 +26,7 @@ class Logger(object):
         self.logger.warning(msg)
 
     def error(self, msg):
-        self.logger.error(msg)
+        self.logger.error(msg,stack_info=True)
 
 
 logger = Logger()

@@ -1,28 +1,26 @@
 import pygame
-from pydispatch import dispatcher
 
-from controllers.stage_controller import StageController
-from utils.utils_factory import UtilsFactory
+from controllers.game_manager import GameManager
+from controllers.screen_controller import ScreenController
+from utils.const import SCREEN_SIZE
 from utils.logger import logger
 
+
+
 if __name__ == '__main__':
-    logger.info("Game Start")
+    logger.info("game Start")
+
     pygame.init()
-    running = True
+    screen_controller = ScreenController()
+    screen = pygame.display.set_mode(SCREEN_SIZE)
 
-    player_data = UtilsFactory.get_player_data('Frozen')
-    stage_data = UtilsFactory.get_state_data(1)
-    stage_controller = StageController(stage_data,player_data)
-    screen = pygame.display.set_mode(stage_data.background.size)
-
-    while running:
+    while GameManager.getInstance().running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                logger.info("Game screen is done by QUIT")
-                running = False
-            stage_controller.update_event(event)
+                logger.info("game screen is done by QUIT")
+                GameManager.getInstance().running = False
+            screen_controller.update_event(event)
 
-        stage_controller.update()
-        stage_controller.draw(screen)
+        screen_controller.update()
+        screen_controller.draw(screen)
         pygame.display.update()
-

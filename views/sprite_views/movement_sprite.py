@@ -11,6 +11,8 @@ class State(Enum):
     ATTACK = 4
     RUNNING_ATTACK = 5
     BEATEN = 6
+    FALL_TO_DEAD = 7
+    DEAD = 8
 
 
 class Direction(Enum):
@@ -40,6 +42,7 @@ class MovementSprite(AnimatedSprite):
         self.position_y = start_position[1]
 
         self.is_blocking_move = False
+        self.finish_block_state = State.STANDING
         self.block_count = 0
         self.block_max = 6
 
@@ -64,7 +67,7 @@ class MovementSprite(AnimatedSprite):
 
         self.directions[direction] = state != State.STANDING
 
-        if state != State.STANDING and self.state != State.RUNNING or state == State.ATTACK:
+        if (state != State.STANDING and self.state != State.RUNNING) or (state == State.ATTACK):
             self.last_state = self.state
             self.state = state
         else:
@@ -119,4 +122,6 @@ class MovementSprite(AnimatedSprite):
         if self.block_count >= self.block_max:
             self.block_count = 0
             self.is_blocking_move = False
-            self.set_state(State.STANDING, self.faceDirection)
+            for direction in self.directions:
+                if self.directions[direction]:
+                    self.set_state(self.finish_block_state, direction)

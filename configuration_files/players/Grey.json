@@ -15,7 +15,8 @@
         "defense":"/grey/defense",
         "defense_running":"/grey/defense_running",
         "running":"/grey/running",
-        "fall":"/grey/fall"
+        "fall":"/grey/fall",
+        "dead" : "/grey/dead"
    },
    "attack": {
         "hand_attack":5,
