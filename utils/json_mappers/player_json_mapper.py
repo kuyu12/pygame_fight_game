@@ -27,3 +27,4 @@ class AttackMapper:
     ATTACK_FOOT = "foot_attack"
     ATTACK_RUNNING_HAND = "running_hand_attack"
     ATTACK_RUNNING_FOOT = "running_foot_attack"
+

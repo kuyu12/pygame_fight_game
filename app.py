@@ -24,3 +24,5 @@ if __name__ == '__main__':
         screen_controller.update()
         screen_controller.draw(screen)
         pygame.display.update()
+
+    GameManager.getInstance().save_state()
