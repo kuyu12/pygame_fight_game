@@ -2,8 +2,13 @@
   "stage_image": "background3",
   "stage_name":"The Throne",
   "road_map": [
-    {"1": "Grey"},
-    {"1": "Grey"}
+    [{"1": "Grey"}],
+    [{"1": "Grey"}],
+    [{"2": "Grey"}],
+    [{"3": "Grey"}],
+    [{"3": "Grey"}],
+    [{"4": "Grey"}],
+    [{"10": "Grey"}]
   ],
   "user_start_position": [450, 600]
 }
