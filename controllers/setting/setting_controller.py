@@ -1,7 +1,10 @@
+import random
+
 import pygame
 from pydispatch import dispatcher
 
 from controllers.game.sprite_controller import SpriteController
+from controllers.game_manager import GameManager
 from controllers.surface_controller import SurfaceController
 from enums.screen_type import ScreenType
 from utils.color import WHITE, GREY
@@ -19,9 +22,9 @@ class SettingController(SurfaceController):
         self.sprite_controller = SpriteController(self.background)
 
         self.player_setting_dict = []
-        for i in range(2):
-            for j in range(4):
-                self.player_setting_dict.append(PlayerSettingView((SCREEN_SIZE[0]/4 * j + 50,SCREEN_SIZE[1]/3 + 150*i ),"frozen"))
+        player_temp = ["frozen","firen","grey","rudolf"]
+        for i in range(4):
+                self.player_setting_dict.append(PlayerSettingView((SCREEN_SIZE[0]/4 * i + 50,SCREEN_SIZE[1]/3 ),player_temp[i]))
 
         self.buttonStart = Button(
             None, SCREEN_SIZE[0] / 2 - BUTTON_SIZE[0] / 2, SCREEN_SIZE[1] / 1.2, BUTTON_SIZE[0], BUTTON_SIZE[1],
@@ -32,6 +35,8 @@ class SettingController(SurfaceController):
             onClick=lambda: self.send_change_type_signl(ScreenType.MENU))
 
     def send_change_type_signl(self,type):
+        selected_player = next(filter(lambda x: x.is_select,self.player_setting_dict),None)
+        GameManager.getInstance().user_player = selected_player.player_name
         dispatcher.send(signal=SignalMapper.SCREEN_TYPE_CHANGE,
                         event=type)
 
@@ -42,10 +47,10 @@ class SettingController(SurfaceController):
         self.buttonStart.listen(event)
 
         pressed = pygame.mouse.get_pressed()
-        if pressed:
+        if pressed[0]:
             pos = pygame.mouse.get_pos()
-            clicked_player = next(filter(lambda x: x.rect.collidepoint(pos),self.player_setting_dict),None)
-
+            clicked_player = next(filter(lambda x: x.get_rect().collidepoint(pos),self.player_setting_dict),None)
+            print(clicked_player)
             if clicked_player:
                 for element in self.player_setting_dict:
                     element.is_select = False

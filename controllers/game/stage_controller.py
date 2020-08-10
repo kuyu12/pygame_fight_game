@@ -42,13 +42,13 @@ class StageController(SurfaceController):
         dispatcher.connect(self.handle_collision_event, signal=SignalMapper.COLLISION_UPDATE, sender=dispatcher.Any)
 
         # TEMP
-        for temp in range(4):
-            enemy_data = UtilsFactory.get_player_data('Grey')
-            enemy_id = uuid.uuid4()
-            self.game_state.add_enemy(enemy_data, enemy_id)
-            self.enemy = EnemySprite((random.randint(100, 900), 600), stage_data.background.size, enemy_data,
-                                     self.user_sprite, enemy_id)
-            self.sprite_controller.add(self.enemy)
+        # for temp in range(4):
+        #     enemy_data = UtilsFactory.get_player_data('Grey')
+        #     enemy_id = uuid.uuid4()
+        #     self.game_state.add_enemy(enemy_data, enemy_id)
+        #     self.enemy = EnemySprite((random.randint(100, 900), 600), stage_data.background.size, enemy_data,
+        #                              self.user_sprite, enemy_id)
+        #     self.sprite_controller.add(self.enemy)
         # END TEMP
 
     def update(self):
