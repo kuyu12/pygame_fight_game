@@ -1,12 +1,10 @@
-import random
-
 import pygame
 from pydispatch import dispatcher
-
 from controllers.game.sprite_controller import SpriteController
 from controllers.game_manager import GameManager
 from controllers.surface_controller import SurfaceController
 from enums.screen_type import ScreenType
+from utils.logger import logger
 from utils.color import WHITE, GREY
 from utils.const import SCREEN_SIZE, BUTTON_SIZE
 from utils.json_mappers.stage_json_mapper import SignalMapper
@@ -20,6 +18,7 @@ from os import listdir
 class SettingController(SurfaceController):
 
     def __init__(self):
+        logger.info("SettingController is Created")
         self.background = BackgroundSprite(background_name='background1')
         self.sprite_controller = SpriteController(self.background)
         self.players = [f.split('.')[0] for f in listdir(CONFIGURATION_FILES_PATH + '/players')]
@@ -35,9 +34,6 @@ class SettingController(SurfaceController):
             inactiveColour=WHITE,
             pressedColour=GREY, radius=20,
             onClick=lambda: self.send_change_type_signl(ScreenType.MENU))
-
-        print(self.players)
-        print(GameManager.getInstance().user_player)
         selected_player = next(
             filter(lambda x: x.player_name == GameManager.getInstance().user_player, self.player_setting_dict), None)
         selected_player.is_select = True
@@ -58,7 +54,6 @@ class SettingController(SurfaceController):
         if pressed[0]:
             pos = pygame.mouse.get_pos()
             clicked_player = next(filter(lambda x: x.get_rect().collidepoint(pos), self.player_setting_dict), None)
-            print(clicked_player)
             if clicked_player:
                 for element in self.player_setting_dict:
                     element.is_select = False

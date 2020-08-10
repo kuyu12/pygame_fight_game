@@ -87,13 +87,12 @@ class StageController(SurfaceController):
         pass_time = datetime.datetime.now() - self.start_stage_time
         if pass_time > datetime.timedelta(seconds = 6) and len(self.game_state.enemies) == 0:
             if len(self.stage_data.road_map) == 0:
-                print("Stage is end ")
+                logger.info("Game is Over")
                 dispatcher.send(signal=SignalMapper.SCREEN_TYPE_CHANGE,
                                 event=ScreenType.MENU)
                 return
 
             current_enemeis = self.stage_data.road_map.pop(0)
-            print(current_enemeis)
             for enemy_dict in current_enemeis:
                 for key in enemy_dict:
                     [self.add_enemy(enemy_dict[key]) for num in range(int(key))]

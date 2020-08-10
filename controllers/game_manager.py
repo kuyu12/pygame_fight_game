@@ -1,6 +1,7 @@
 import json
 
 from utils.json_mappers.game_data_json_mapper import GameDataMapper
+from utils.logger import logger
 from utils.path_utils import CONFIGURATION_FILES_PATH
 from utils.utils_factory import UtilsFactory
 
@@ -34,6 +35,7 @@ class GameManager:
         return UtilsFactory.get_state_data(self.stage)
 
     def save_state(self):
+        logger.info("Save GameManager State to file")
         self.game_data[GameDataMapper.SELECTED_PLAYER] = self.user_player
         with open(CONFIGURATION_FILES_PATH + '/game_data/game_data.json', 'w') as game_data_file:
             json.dump(self.game_data, game_data_file)

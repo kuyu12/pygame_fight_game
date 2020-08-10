@@ -3,6 +3,7 @@ from pydispatch import dispatcher
 from controllers.surface_controller import SurfaceController
 from controllers.game.sprite_controller import SpriteController
 from enums.screen_type import ScreenType
+from utils.logger import logger
 from utils.color import WHITE, GREY
 from utils.const import HEADLINE_SIZE, NORMAL_SIZE, SCREEN_SIZE, BUTTON_SIZE
 from utils.json_mappers.stage_json_mapper import SignalMapper
@@ -14,6 +15,8 @@ from views.sprite_views.background_sprite import BackgroundSprite
 class MenuController(SurfaceController):
 
     def __init__(self):
+        logger.info("MenuController is Created")
+
         self.background = BackgroundSprite(background_name='background1')
         self.sprite_controller = SpriteController(self.background)
 

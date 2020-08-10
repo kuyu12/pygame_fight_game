@@ -5,6 +5,7 @@ from controllers.game.stage_controller import StageController
 from controllers.setting.setting_controller import SettingController
 from controllers.surface_controller import SurfaceController
 from enums.screen_type import ScreenType
+from utils.logger import logger
 from utils.json_mappers.stage_json_mapper import SignalMapper
 
 
@@ -24,6 +25,7 @@ def get_controller(screen_type):
 class ScreenController(SurfaceController):
 
     def __init__(self):
+        logger.info("ScreenController is Created")
         self.type = ScreenType.MENU
         self.current_surface_controller = MenuController()
 
@@ -31,7 +33,6 @@ class ScreenController(SurfaceController):
         dispatcher.connect(self.on_change_type_request, signal=SignalMapper.SCREEN_TYPE_CHANGE, sender=dispatcher.Any)
 
     def on_change_type_request(self, event):
-        print(event)
         if isinstance(event, ScreenType):
             controller = get_controller(event)
             if controller:
