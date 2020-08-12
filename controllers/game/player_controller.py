@@ -8,8 +8,9 @@ from views.sprite_views.movement_sprite import Direction, State
 
 class PlayerController:
 
-    def __init__(self, player):
+    def __init__(self, player,game_state):
         self.player = player
+        self.game_state = game_state
         self.dbclock_R = pygame.time.Clock()
         self.dbclock_L = pygame.time.Clock()
 
@@ -48,7 +49,7 @@ class PlayerController:
                 self.player.attack(AttackState.DEFENSE)
 
     def combo_attack_if_needed(self, attack):
-        if self.player.is_attack_combo(attack):
+        if self.player.is_attack_combo(attack) and self.game_state.user_state.user_mana > 10:
             dispatcher.send(signal=SignalMapper.COMBO_ATTACK,
                             event=ComboEvent(self.player))
             self.player.attack(AttackState.COMBO)

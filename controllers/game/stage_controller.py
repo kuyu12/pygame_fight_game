@@ -34,7 +34,7 @@ class StageController(SurfaceController):
 
         # controllers
         self.sprite_controller = SpriteController(self.stage_data.background, self.user_sprite)
-        self.player_controller = PlayerController(self.user_sprite)
+        self.player_controller = PlayerController(self.user_sprite,self.game_state)
         self.collision_controller = CollisionController(self.sprite_controller)
 
         # views
@@ -73,6 +73,7 @@ class StageController(SurfaceController):
         self.sprite_controller.handle_collision_event(event)
 
     def handle_combo_event(self, event):
+        self.game_state.handle_combo_event(event)
         self.sprite_controller.handle_combo_event(event)
 
     def add_enemy(self, name):

@@ -22,9 +22,10 @@
         "fire_attack_move" : ""
    },
    "attack": {
-        "hand_attack":15,
-        "foot_attack":5,
+        "hand_attack":5,
+        "foot_attack":15,
         "running_hand_attack":20,
-        "running_foot_attack":10
+        "running_foot_attack":10,
+        "combo_attack":10
    }
 }

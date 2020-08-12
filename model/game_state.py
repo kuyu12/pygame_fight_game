@@ -25,3 +25,7 @@ class GameState:
         elif self.enemies.get(event.beaten):
             damage = self.user_state.get_attack_damage(event.attack, event.state)
             self.enemies.get(event.beaten).set_damage(damage)
+
+    def handle_combo_event(self,event):
+        if self.user_state.user_id == event.player.player_id:
+            self.user_state.user_mana -= 10

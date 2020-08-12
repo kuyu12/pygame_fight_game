@@ -2,6 +2,7 @@ from pydispatch import dispatcher
 from model.events.collision_event import CollisionEvent
 from utils.const import COLLISION_DELAY_TIME_SEC
 from utils.json_mappers.stage_json_mapper import SignalMapper
+from views.sprite_views.attack_sprite import AttackState
 from views.sprite_views.combo_attack_sprite import ComboAttackSprite
 from views.sprite_views.enemy_sprite import EnemySprite
 from views.sprite_views.user_sprite import UserSprite
@@ -27,7 +28,7 @@ class CollisionController:
             if isinstance(sprite,ComboAttackSprite):
                 for sprite_com in self.spriteController.sprites():
                     if isinstance(sprite_com, EnemySprite) and sprite_com.rect.colliderect(sprite.rect) and not sprite_com.is_on_defence_mode():
-                        self.send_attack_event("", sprite_com.player_id, sprite.attack_state,
+                        self.send_attack_event("", sprite_com.player_id, AttackState.COMBO,
                                                sprite.state)
 
     def send_attack_event(self, beat, beaten, attack, state):
