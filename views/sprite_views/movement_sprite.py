@@ -59,6 +59,10 @@ class MovementSprite(AnimatedSprite):
 
         super().__init__(start_position, self.images)
 
+    @property
+    def location(self):
+        return (self.rect.x, self.rect.y)
+
     def set_state(self, state, direction):
         # current state is blocking move
         if self.is_blocking_move:

@@ -1,9 +1,13 @@
 import uuid
+from enum import Enum
 from functools import reduce
 import pygame
-from views.sprite_views.attack_sprite import AttackSprite, AttackState
+from views.sprite_views.attack_sprite import AttackSprite
 from views.sprite_views.movement_sprite import State, Direction
-from utils.logger import logger
+
+
+class ComboAttack(Enum):
+    SHOT = 1
 
 
 class PlayerSprite(AttackSprite):
@@ -12,7 +16,6 @@ class PlayerSprite(AttackSprite):
         self.player_data = player_data
         self.move_speed = move_speed
         self.player_id = str(player_id)
-        self.on_dead_animation_finish = lambda x: x  # empty func
         super().__init__(start_position, bounds_size)
 
     def load_images(self):
@@ -55,7 +58,26 @@ class PlayerSprite(AttackSprite):
         self.dead_R = self.get_images_with_path(self.player_data.sprite_dead_path)
         self.dead_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.dead_R))
 
+        if self.player_data.is_support_fire_attack:
+            self.shot_move_R = self.get_images_with_path(self.player_data.sprite_fire_attack_move_path)
+            self.shot_move_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.shot_move_R))
+
+            self.shot_R = self.get_images_with_path(self.player_data.sprite_fire_attack_path)
+            self.shot_L = list(map(lambda x: pygame.transform.flip(x, True, False), self.shot_R))
+        else:
+            self.shot_move_R = self.attack_hand_R
+            self.shot_move_L = self.attack_hand_L
+
         self.images = self.stand_R
+
+    def get_combo_images(self, combo):
+        if not self.player_data.is_support_fire_attack:
+            return None
+
+        if combo == ComboAttack.SHOT:
+            return self.shot_R if self.faceDirection == Direction.RIGHT else self.shot_L
+
+        return None
 
     def control_move(self, state=None, direction=None):
         if direction is None:
@@ -73,10 +95,6 @@ class PlayerSprite(AttackSprite):
 
     def on_state_change(self, state, direction):
         super().on_state_change(state, direction)
-
-        if self.state == State.DEAD:
-            self.on_dead_animation_finish(self)
-            return
 
         if self.state == State.WALKING:
             self.images = self.walk_images_R if self.faceDirection == Direction.RIGHT else self.walk_images_L

@@ -9,6 +9,7 @@ class PlayerData:
         self.sprite_data = self.player_data[SpriteMapper.SPRITE]
         self.attack_data = self.player_data[AttackMapper.ATTACK_INFO]
         self.player_info_data = self.player_data[InfoMapper.USER_INFO]
+        self.is_support_fire_attack = self.player_info_data[InfoMapper.SUPPORT_FIRE_ATTACK]
 
         # sprite paths
         self.sprite_walk_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_WALK]
@@ -23,6 +24,10 @@ class PlayerData:
         self.sprite_running_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_RUNNING]
         self.sprite_fall_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FALL]
         self.sprite_dead_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_DEAD]
+
+        if self.is_support_fire_attack:
+            self.sprite_fire_attack_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FIRE_ATTACK]
+            self.sprite_fire_attack_move_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FIRE_ATTACK_MOVE]
 
         # info
         self.player_name = self.player_info_data[InfoMapper.PLAYER_NAME]

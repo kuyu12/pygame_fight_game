@@ -3,7 +3,8 @@
         "player_name":"Grey",
         "profile_image": "/grey_profile.png",
         "start_health": 20,
-        "start_mana": 0
+        "start_mana": 0,
+     "support_fire_attack" : false
    },
    "sprite" : {
         "walk":"/grey/walk",
@@ -16,7 +17,9 @@
         "defense_running":"/grey/defense_running",
         "running":"/grey/running",
         "fall":"/grey/fall",
-        "dead" : "/grey/dead"
+        "dead" : "/grey/dead",
+        "fire_attack": "",
+        "fire_attack_move" : ""
    },
    "attack": {
         "hand_attack":5,

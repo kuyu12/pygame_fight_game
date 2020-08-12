@@ -11,6 +11,8 @@ class SpriteMapper:
     SPRITE_RUNNING = "running"
     SPRITE_FALL = "fall"
     SPRITE_DEAD = "dead"
+    SPRITE_FIRE_ATTACK = "fire_attack"
+    SPRITE_FIRE_ATTACK_MOVE = "fire_attack_move"
 
 
 class InfoMapper:
@@ -19,6 +21,7 @@ class InfoMapper:
     PROFILE_IMAGE = "profile_image"
     START_HEALTH = "start_health"
     START_MANA = "start_mana"
+    SUPPORT_FIRE_ATTACK = "support_fire_attack"
 
 
 class AttackMapper:

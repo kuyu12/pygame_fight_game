@@ -22,6 +22,7 @@ class PlayerState:
                 return self.attack_dict[AttackMapper.ATTACK_HAND]
             if attack_state == AttackState.FOOT:
                 return self.attack_dict[AttackMapper.ATTACK_FOOT]
+        return 0
 
     def set_damage(self,damage):
         self.user_health -= damage

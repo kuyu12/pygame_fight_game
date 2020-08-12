@@ -6,7 +6,7 @@ class AttackState(Enum):
     HAND = 1
     FOOT = 2
     DEFENSE = 3
-    SHOT = 4
+    COMBO = 4
 
 
 class AttackSprite(MovementSprite):
@@ -17,12 +17,18 @@ class AttackSprite(MovementSprite):
         self.attack_block_max = 6
         self.attack_state = AttackState.HAND
 
-    def attack(self, attack):
-        if self.attack_state == AttackState.DEFENSE and attack == AttackState.HAND:
-            print(" I GET HERE!")
+        self.on_dead_animation_finish = lambda x: x  # empty func
 
+    def attack(self, attack):
         self.attack_state = attack
         self.set_state(State.ATTACK, self.faceDirection)
+
+    def is_attack_combo(self, attack):
+        if self.attack_state == AttackState.DEFENSE \
+                and attack == AttackState.HAND \
+                and (self.directions[Direction.RIGHT] or self.directions[Direction.LEFT]):
+            return True
+        return False
 
     def is_on_attack_mode(self):
         if (self.state == State.ATTACK or self.state == State.RUNNING_ATTACK) \
@@ -46,6 +52,10 @@ class AttackSprite(MovementSprite):
             self.attack_block_count = 0
             self.is_attack_active = True
 
+        if self.state == State.DEAD:
+            self.on_dead_animation_finish(self)
+            return
+
         super().on_state_change(state, direction)
 
     def get_attack_images(self):
@@ -63,6 +73,9 @@ class AttackSprite(MovementSprite):
 
         if self.attack_state == AttackState.HAND:
             return self.attack_hand_R if self.faceDirection == Direction.RIGHT else self.attack_hand_L
+
+        if self.attack_state == AttackState.COMBO:
+            return self.shot_move_R if self.faceDirection == Direction.RIGHT else self.shot_move_L
 
         if self.attack_state == AttackState.FOOT:
             return self.attack_foot_R if self.faceDirection == Direction.RIGHT else self.attack_foot_L

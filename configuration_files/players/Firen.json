@@ -3,7 +3,8 @@
         "player_name":"Firen",
         "profile_image": "/firen_profile.png",
         "start_health": 100,
-        "start_mana": 100
+        "start_mana": 100,
+        "support_fire_attack" : true
    },
    "sprite" : {
         "walk":"/firen/walk",
@@ -16,7 +17,9 @@
         "defense_running":"/firen/defense_running",
         "running":"/firen/running",
         "fall":"/firen/fall",
-        "dead":"/frozen/dead"
+        "dead":"/firen/dead",
+        "fire_attack": "/firen/attack_fire_1",
+        "fire_attack_move" : "/firen/fire_move"
    },
    "attack": {
         "hand_attack":10,

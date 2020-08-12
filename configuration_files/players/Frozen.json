@@ -3,7 +3,8 @@
         "player_name":"Frozen",
         "profile_image": "/frozen_profile.png",
         "start_health": 100,
-        "start_mana": 100
+        "start_mana": 100,
+        "support_fire_attack" : true
    },
    "sprite" : {
         "walk":"/frozen/walk",
@@ -16,7 +17,9 @@
         "defense_running":"/frozen/defense_running",
         "running":"/frozen/running",
         "fall":"/frozen/fall",
-        "dead":"/frozen/dead"
+        "dead":"/frozen/dead",
+        "fire_attack": "/frozen/attack_fire_1",
+        "fire_attack_move" : "/frozen/fire_move"
    },
    "attack": {
         "hand_attack":10,

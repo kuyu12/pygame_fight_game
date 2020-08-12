@@ -1,5 +1,6 @@
 import pygame
 
+from views.sprite_views.combo_attack_sprite import ComboAttackSprite
 from views.sprite_views.enemy_sprite import EnemySprite
 from views.sprite_views.movement_sprite import State
 from views.sprite_views.player_sprite import PlayerSprite
@@ -15,7 +16,7 @@ class SpriteController(pygame.sprite.Group):
         self.background_group.update()
         self.sortSpriteByLocation()
 
-    def draw(self, surface, game_state = None):
+    def draw(self, surface, game_state=None):
         self.background_group.draw(surface)
         super().draw(surface)
 
@@ -50,3 +51,7 @@ class SpriteController(pygame.sprite.Group):
 
         if event.state == State.RUNNING_ATTACK:
             beaten_sprite.control_move(State.BEATEN, beat_sprite.faceDirection.negative())
+
+    def handle_combo_event(self, event):
+        combo_sprite = ComboAttackSprite(event.player, event.combo_attack, on_finish=self.remove_by_id)
+        self.add(combo_sprite)

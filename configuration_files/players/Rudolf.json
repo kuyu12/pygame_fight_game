@@ -3,7 +3,8 @@
         "player_name":"Rudolf",
         "profile_image": "/rudolf_profile.png",
         "start_health": 110,
-        "start_mana": 20
+        "start_mana": 20,
+     "support_fire_attack" : false
    },
    "sprite" : {
         "walk":"/rudolf/walk",
@@ -16,7 +17,9 @@
         "defense_running":"/rudolf/defense_running",
         "running":"/rudolf/running",
         "fall":"/rudolf/fall",
-        "dead":"/rudolf/dead"
+        "dead":"/rudolf/dead",
+        "fire_attack": "",
+        "fire_attack_move" : ""
    },
    "attack": {
         "hand_attack":15,

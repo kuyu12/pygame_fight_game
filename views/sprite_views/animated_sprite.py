@@ -32,6 +32,9 @@ class AnimatedSprite(pygame.sprite.Sprite):
         self.rect.y = position[1]
 
     def update_time_dependent(self, dt):
+        if self.images is None:
+            return
+
         self.current_time = self.current_time + dt
         if self.current_time >= self.animation_time:
             self.current_time = 0
@@ -40,6 +43,9 @@ class AnimatedSprite(pygame.sprite.Sprite):
             self.frame_was_update()
 
     def update_frame_dependent(self):
+        if self.images is None:
+            return
+
         self.current_frame += 1
         if self.current_frame >= self.animation_frames:
             self.current_frame = 0

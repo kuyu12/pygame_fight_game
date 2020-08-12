@@ -43,6 +43,7 @@ class StageController(SurfaceController):
 
         # events
         dispatcher.connect(self.handle_collision_event, signal=SignalMapper.COLLISION_UPDATE, sender=dispatcher.Any)
+        dispatcher.connect(self.handle_combo_event, signal=SignalMapper.COMBO_ATTACK, sender=dispatcher.Any)
 
     def update(self):
         self.stage_update()
@@ -71,12 +72,15 @@ class StageController(SurfaceController):
         self.game_state.handle_collision_event(event)
         self.sprite_controller.handle_collision_event(event)
 
-    def add_enemy(self,name):
+    def handle_combo_event(self, event):
+        self.sprite_controller.handle_combo_event(event)
+
+    def add_enemy(self, name):
         enemy_data = UtilsFactory.get_player_data(name)
         enemy_id = uuid.uuid4()
         self.game_state.add_enemy(enemy_data, enemy_id)
         enemy = EnemySprite((random.randint(100, 900), 600), self.stage_data.background.size, enemy_data,
-                                 self.user_sprite, enemy_id)
+                            self.user_sprite, enemy_id)
         self.sprite_controller.add(enemy)
 
     def stage_update(self):
@@ -85,19 +89,15 @@ class StageController(SurfaceController):
             self.start_stage_time = datetime.datetime.now()
 
         pass_time = datetime.datetime.now() - self.start_stage_time
-        if pass_time > datetime.timedelta(seconds = 6) and len(self.game_state.enemies) == 0:
+        if pass_time > datetime.timedelta(seconds=6) and len(self.game_state.enemies) == 0:
             if len(self.stage_data.road_map) == 0:
                 logger.info("Game is Over")
                 dispatcher.send(signal=SignalMapper.SCREEN_TYPE_CHANGE,
                                 event=ScreenType.MENU)
                 return
 
-            current_enemeis = self.stage_data.road_map.pop(0)
-            for enemy_dict in current_enemeis:
+            current_enemies = self.stage_data.road_map.pop(0)
+            for enemy_dict in current_enemies:
                 for key in enemy_dict:
                     [self.add_enemy(enemy_dict[key]) for num in range(int(key))]
             self.finish_wave = True
-
-
-
-
