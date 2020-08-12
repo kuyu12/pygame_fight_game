@@ -1,4 +1,4 @@
-from utils.json_mappers.player_json_mapper import SpriteMapper, InfoMapper, AttackMapper
+from utils.json_mappers.player_json_mapper import SpriteMapper, InfoMapper, AttackMapper, ComboMapper
 from utils.path_utils import SPRINT_IMAGE_PATH
 
 
@@ -28,6 +28,7 @@ class PlayerData:
         if self.is_support_fire_attack:
             self.sprite_fire_attack_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FIRE_ATTACK]
             self.sprite_fire_attack_move_path = SPRINT_IMAGE_PATH + self.sprite_data[SpriteMapper.SPRITE_FIRE_ATTACK_MOVE]
+            self.combo_data = self.player_data[ComboMapper.COMBO_ATTACK]
 
         # info
         self.player_name = self.player_info_data[InfoMapper.PLAYER_NAME]

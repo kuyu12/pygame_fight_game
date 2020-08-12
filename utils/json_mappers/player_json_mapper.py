@@ -32,3 +32,10 @@ class AttackMapper:
     ATTACK_RUNNING_HAND = "running_hand_attack"
     ATTACK_RUNNING_FOOT = "running_foot_attack"
 
+
+class ComboMapper:
+    COMBO_ATTACK = "combo_attack"
+    MOVE_X = "move_x"
+    MOVE_Y = "move_y"
+    OFF_SET_X = "off_set_x"
+    OFF_SET_Y = "off_set_y"

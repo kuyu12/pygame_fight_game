@@ -3,8 +3,8 @@
         "player_name":"Rudolf",
         "profile_image": "/rudolf_profile.png",
         "start_health": 110,
-        "start_mana": 20,
-     "support_fire_attack" : false
+        "start_mana": 100,
+        "support_fire_attack" : true
    },
    "sprite" : {
         "walk":"/rudolf/walk",
@@ -18,14 +18,21 @@
         "running":"/rudolf/running",
         "fall":"/rudolf/fall",
         "dead":"/rudolf/dead",
-        "fire_attack": "",
-        "fire_attack_move" : ""
+        "fire_attack": "/rudolf/attack_fire_1",
+        "fire_attack_move" : "/rudolf/fire_move"
    },
    "attack": {
         "hand_attack":5,
         "foot_attack":15,
         "running_hand_attack":20,
         "running_foot_attack":10,
-        "combo_attack":10
+        "combo_attack":30
+   },
+   "combo_attack": {
+        "move_x": 0,
+        "move_y" : 0,
+        "combo_attack":30,
+        "off_set_x" :-40,
+        "off_set_y" :-60
    }
 }

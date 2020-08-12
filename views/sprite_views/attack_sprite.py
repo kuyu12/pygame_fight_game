@@ -24,6 +24,9 @@ class AttackSprite(MovementSprite):
         self.set_state(State.ATTACK, self.faceDirection)
 
     def is_attack_combo(self, attack):
+        print(self.attack_state)
+        print(attack)
+        print(self.directions[Direction.RIGHT])
         if self.attack_state == AttackState.DEFENSE \
                 and attack == AttackState.HAND \
                 and (self.directions[Direction.RIGHT] or self.directions[Direction.LEFT]):

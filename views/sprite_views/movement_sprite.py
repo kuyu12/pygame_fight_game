@@ -61,7 +61,7 @@ class MovementSprite(AnimatedSprite):
 
     @property
     def location(self):
-        return (self.rect.x, self.rect.y+20)
+        return (self.rect.x, self.rect.y)
 
     def set_state(self, state, direction):
         # current state is blocking move

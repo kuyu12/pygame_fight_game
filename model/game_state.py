@@ -28,4 +28,4 @@ class GameState:
 
     def handle_combo_event(self,event):
         if self.user_state.user_id == event.player.player_id:
-            self.user_state.user_mana -= 10
+            self.user_state.user_mana -= event.combo_attack.attack_count

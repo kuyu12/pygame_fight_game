@@ -27,5 +27,10 @@
         "running_hand_attack":10,
         "running_foot_attack":10,
         "combo_attack":10
+   },
+   "combo_attack": {
+        "move_x": 0,
+        "move_y" : 0,
+        "combo_attack":10
    }
 }
