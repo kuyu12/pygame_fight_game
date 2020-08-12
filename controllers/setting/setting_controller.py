@@ -25,7 +25,7 @@ class SettingController(SurfaceController):
         self.player_setting_dict = []
         for i in range(len(self.players)):
             self.player_setting_dict.append(
-                PlayerSettingView((SCREEN_SIZE[0] / 4 * i + 50, SCREEN_SIZE[1] / 3), self.players[i]))
+                PlayerSettingView((SCREEN_SIZE[0] / len(self.players) * i + 50, SCREEN_SIZE[1] / 3), self.players[i]))
 
         self.buttonStart = Button(
             None, SCREEN_SIZE[0] / 2 - BUTTON_SIZE[0] / 2, SCREEN_SIZE[1] / 1.2, BUTTON_SIZE[0], BUTTON_SIZE[1],

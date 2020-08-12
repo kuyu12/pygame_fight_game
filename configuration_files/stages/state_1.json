@@ -3,12 +3,12 @@
   "stage_name":"The Throne",
   "road_map": [
     [{"1": "Grey"}],
-    [{"1": "Grey"}],
-    [{"2": "Grey"}],
-    [{"3": "Grey"}],
-    [{"3": "Grey"}],
-    [{"4": "Grey"}],
-    [{"10": "Grey"}]
+    [{"1": "Mar"}],
+    [{"2": "Grey"},{"1": "Mar"}],
+    [{"3": "Grey"},{"1": "Mar"}],
+    [{"3": "Grey"},{"2": "Mar"}],
+    [{"4": "Grey"},{"3": "Mar"}],
+    [{"5": "Grey"},{"4": "Mar"}]
   ],
   "user_start_position": [450, 600]
 }
