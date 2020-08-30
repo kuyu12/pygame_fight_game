@@ -1,13 +1,8 @@
 import pygame
-from flask import request
-
 from controllers.game_manager import GameManager
 from controllers.screen_controller import ScreenController
 from utils.const import SCREEN_SIZE
 from utils.logger import logger
-
-import requests
-
 
 if __name__ == '__main__':
     logger.info("game Start")

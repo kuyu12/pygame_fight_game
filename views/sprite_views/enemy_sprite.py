@@ -2,6 +2,7 @@ import uuid
 from math import sqrt
 import random
 
+from tf_agents.ai import lf_env
 from utils.color import RED, BLACK
 from views.sprite_views.animated_sprite import Update_Type
 from views.sprite_views.attack_sprite import AttackState
@@ -40,7 +41,6 @@ class EnemySprite(PlayerSprite):
     def update(self, update_type=Update_Type.TIME):
 
         # TODO: refactor this section.
-
         dif_x = self.user_player.rect.centerx - self.rect.centerx;
         dif_y = self.user_player.rect.centery - self.rect.centery;
 
