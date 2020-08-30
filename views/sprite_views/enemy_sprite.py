@@ -2,7 +2,7 @@ import uuid
 from math import sqrt
 import random
 
-from tf_agents.ai import lf_env
+from tf_agents_policy.ai import policy, get_env
 from utils.color import RED, BLACK
 from views.sprite_views.animated_sprite import Update_Type
 from views.sprite_views.attack_sprite import AttackState
@@ -50,17 +50,18 @@ class EnemySprite(PlayerSprite):
             super().update(update_type)
             return
 
-        hyp = sqrt(dif_x * dif_x + dif_y * dif_y);
-        if hyp != 0:
-            self.direction_x = dif_x / hyp;
-            self.direction_y = dif_y / hyp;
+        location = [self.rect.centerx, self.rect.centery, self.user_player.rect.centerx, self.user_player.rect.centery]
+        env = get_env(location)
+        time_step = env.reset()
+        action = policy.action(time_step)
+        move_int = action.action.numpy()[0]
 
         if abs(dif_x) > self.rect.width / 2:
             self.is_attack_x_ready = False
-            if self.direction_x > 0:
+            if move_int == 0:
                 self.control_move(State.WALKING, Direction.RIGHT)
                 self.control_move(State.STANDING, Direction.LEFT)
-            if self.direction_x < 0:
+            if move_int == 1:
                 self.control_move(State.WALKING, Direction.LEFT)
                 self.control_move(State.STANDING, Direction.RIGHT)
         else:
@@ -68,12 +69,12 @@ class EnemySprite(PlayerSprite):
             self.control_move(State.STANDING, Direction.RIGHT)
             self.control_move(State.STANDING, Direction.LEFT)
 
-        if self.direction_y > self.Y_DEDUCTION_THRESHOLD or dif_y < -self.Y_DEDUCTION_THRESHOLD:
+        if abs(dif_y) > self.rect.height / 2:
             self.is_attack_y_ready = False
-            if self.direction_y > 0:
+            if move_int == 2:
                 self.control_move(State.WALKING, Direction.DOWN)
                 self.control_move(State.STANDING, Direction.UP)
-            if self.direction_y < 0:
+            if move_int == 3:
                 self.control_move(State.WALKING, Direction.UP)
                 self.control_move(State.STANDING, Direction.DOWN)
         else:

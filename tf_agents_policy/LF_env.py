@@ -31,10 +31,10 @@ class littleFighterEnv(py_environment.PyEnvironment):
         self._state = location
 
     def __get_rand_state(self):
-        return [450, 600, random.randint(100, 900), random.randint(500, 700)]
+        return [random.randint(100, 900), random.randint(300, 700), random.randint(100, 900), 600]
 
     def _reset(self):
-        self._state = self.__get_rand_state()
+        # self._state = self.__get_rand_state()
         self._episode_ended = False
         self._round_counter = 0
         self._isWin = False
